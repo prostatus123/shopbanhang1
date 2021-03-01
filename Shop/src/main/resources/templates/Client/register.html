@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+<title>Register</title>
+<!-- jQuery 2.2.0 -->
+	<script src="static/jQuery/jQuery-2.2.0.min.js"></script>
+	<!-- jQuery UI 1.11.4 -->
+	<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+	<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+	<!-- <script>
+		$.widget.bridge('uibutton', $.ui.button);
+	</script> -->
+	<!-- Bootstrap 3.3.6 -->
+	<script src="static/js/bootstrap.min.js"></script>
+<link href="static/css/loginadm.css" rel="stylesheet">
+</head>
+<body>
+<div class="login-admin">
+
+	
+	<div class=form-login>
+	
+	<h2 style="text-align: center;">Đăng Ký Tài Khoản</h2>
+	<form th:action="@{/register}" method="post">
+	<div class="container">
+	Nếu bạn đã đăng ký tài khoản, vui lòng đăng nhập <a th:href="@{login}">Tại Đây</a>
+	<br/>
+
+    Lưu ý: Các mục dấu sao màu đỏ không được bỏ trống & phải điền đầy đủ, chính xác
+		<div>
+			<label style="color: red">*</label><label>Họ và Tên</label> <input name="name" type="text" placeholder="Họ và Tên" required="required" />
+		</div>
+		<div>
+			<label style="color: red">*</label><label>Tuổi</label><br/><input type="number" name="age" placeholder="Tuổi" />
+		</div>
+		<div>
+			<label style="color: red">*</label><label>Giới Tính</label><br/> <select name="gender">
+			
+				<option value="Nam">Nam</option>
+				<option value="Nữ">Nữ</option>
+			</select>
+		</div>
+		<div>
+			<label style="color: red">*</label><label>Địa Chỉ</label> <input type="text" name="address" placeholder="Địa chỉ" />
+		</div>
+		<div>
+			<label style="color: red">*</label><label>Email</label><br/> <input type="email" name="email" placeholder="email" />
+		</div>
+		<div>
+			<label style="color: red">*</label><label>Số Điện Thoại</label> <input type="text" name="phone" placeholder="Số Điện Thoại" />
+		</div> 
+		<div>
+			<label style="color: red">*</label><label>Tài Khoản</label><input type="text" name="username" placeholder="Tài Khoản" required="required" />
+		</div>
+		<div>
+			<label style="color: red">*</label><label>Mật Khẩu</label><input type="password" name="password" placeholder="Mật Khẩu" required="required" />
+		</div>
+		<div>
+			
+			 <button type="submit" class="btn btn-info"value="register" >Đăng Ký</button>
+		</div>
+	</form>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html layout:decorator="admin/template">
+<head>
+<meta charset="UTF-8" />
+<title>Add Product</title>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+</head>
+<body layout:fragment="content" th:remove="tag">
+	<div>
+		<form th:action="@{/admin/product/add}" th:object="${product}"
+			method="post" enctype="multipart/form-data">
+			<p>Them Product</p>
+			<div>
+				<label>Name</label> <input type="text" th:field="*{name}" />
+			</div>
+			<div>
+				<label>Price</label> <input type="text" th:field="*{price}" />
+			</div>
+			<div>
+				<label>Description</label>
+				<textarea rows="" cols="" th:field="*{description}"></textarea>
+			</div>
+			<div>
+				<label>So Luong</label> <input type="text" th:field="*{soLuong}" />
+			</div>
+			<div>
+				<label>Category</label> <select th:field="*{category.id}">
+					<option th:each="id: ${categoryList}" th:value="${id.id}"
+						th:text="${id.name}"></option>
+				</select>
+			</div>
+
+			<div>
+				<label>Thuong Hieu</label> <select th:field="*{thuongHieuDTO.id}">
+					<option th:each="thuonghieu: ${thuongHieuList}"
+						th:value="${thuonghieu.id}" th:text="${thuonghieu.name}"></option>
+				</select>
+			</div>
+
+			<div>
+				<label>Kích thước</label> <select th:field="*{kichThuocDTO.id}">
+					<option th:each="kichthuoc: ${kichThuocList}"
+						th:value="${kichthuoc.id}" th:text="${kichthuoc.name}"></option>
+				</select>
+			</div>
+
+			<div>
+				<label>Gioi Tinh</label> <select th:field="*{gioiTinhDTO.id}">
+					<option th:each="gioiTinh: ${gioiTinhList}"
+						th:value="${gioiTinh.id}" th:text="${gioiTinh.name}"></option>
+				</select>
+			</div>
+
+			<div>
+				<label>Image</label> <input type="file" name="imageFile"
+					accept="image/*" />
+			</div>
+			<div>
+				<button type="submit">ADD</button>
+			</div>
+
+		</form>
+	</div>
+</body>
+</html>

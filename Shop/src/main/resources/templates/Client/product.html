@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html layout:decorator="client/template">
+<head>
+<meta charset="UTF-8">
+<title>Product</title>
+</head>
+<body layout:fragment="content" th:remove="tag">
+
+	<div id="body">
+		<div class="ngang">
+			<h3>Sản phẩm/ Thông tin sản phẩm</h3>
+		</div>
+		<div class="container">
+			<div class="row sanpham">
+				<div class="col-sm-6 ">
+					<img class="anhproduct"
+						th:src="@{'/download?image='+${product.image }}" alt="#" />
+				</div>
+				<div class="col-sm-6">
+
+
+					<h1 th:text="${product.name }"></h1>
+					<div class="conten price">
+						<label class="categoryname">Giá: </label> <span
+							th:text="${product.price }"></span> đ
+					</div>
+					<div class="row">
+						<div class="col-sm-6">
+							<div class="conten">
+								<div class="row-title">
+									<label class="categoryname">Thể loại: </label> <span
+										th:text="${product.category.name }"></span>
+								</div>
+							</div>
+							<div class="conten">
+								<div class="row-title">
+									<label class="categoryname">Thương hiểu: </label> <span
+										th:text="${product.thuongHieuDTO.name }"></span>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="conten">
+								<div class="row-title">
+									<label class="categoryname">giới tính: </label> <span
+										th:text="${product.gioiTinhDTO.name }"></span>
+								</div>
+							</div>
+							<div class="conten ne">
+								<div class="row-title">
+									<label class="categoryname">Kích thước: </label> <span
+										th:text="${product.kichThuocDTO.name }"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="buttoncart" th:switch="${product.soLuong }>0">
+						<a class="cartbuton" th:case="${true}"
+							th:href="@{'/member/add-to-cart?pid='+${product.id}}"
+							role="button"> THÊM VÀO GIỎ HÀNG </a> <label th:case="*">het
+							hang</label>
+					</div>
+
+					<div class="conten net">
+						<label class="categoryname">Mô tả :</label> <span
+							th:text="${product.description }"></span>
+
+					</div>
+				</div>
+			</div>
+			<div class="formcomment">
+				<form th:action="@{/member/comment}" method="post">
+					<input type="hidden" name="productId" th:value="${product.id}" />
+					<textarea class="binhluan" type="text" name="comment"
+						placeholder="Bình luận của bạn..."></textarea>
+
+					<input class="comment" type="submit" value="Gửi nội dung" />
+				</form>
+			</div>
+
+			<div class="noidungcooment" th:each="c:${commentProduct}">
+				<div class="commentform">
+					<div class="commentname" th:text="${c.userDTO.name}"></div>
+					<div class="commentdate" th:text="${c.commentDate}"></div>
+				</div>
+				<div class="commentn" th:text="${c.comment}"></div>
+				<hr>
+			</div>
+			<div>
+				<p>
+					danh gia (<label th:text="${dem}"> </label>)
+				</p>
+				<label th:text="${totalStar}"> </label>
+
+			</div>
+			<div class="sao" th:each="r:${reviews}">
+				<label th:text="${r.starNumber}"></label> <label
+					th:text="${r.userDTO.name}"></label>
+			</div>
+			<div class="stars">
+				<form th:action="@{/member/review}" method="post">
+					<input type="hidden" name="productId" th:value="${product.id}" />
+					<input class="star star-5" type="radio" id="star5"
+						name="starNumber" value="5" /> <label class=" star star-5 full"
+						for="star5" title="Awesome - 5 stars"></label> <input
+						class="star star-4" type="radio" id="star4" name="starNumber"
+						value="4" /> <label class="star star-4 full" for="star4"
+						title="Pretty good - 4 stars"></label> <input class="star star-3"
+						type="radio" id="star3" name="starNumber" value="3" /> <label
+						class=" star star-3 full" for="star3" title="Meh - 3 stars"></label>
+					<input class="star star-2" type="radio" id="star2"
+						name="starNumber" value="2" /> <label class=" star star-2 full"
+						for="star2" title="Kinda bad - 2 stars"></label> <input
+						class="star star-1" type="radio" id="star1" name="starNumber"
+						value="1" /> <label class="star star-1 full" for="star1"
+						title="Sucks big time - 1 star"></label> <input type="submit"
+						value="send" />
+				</form>
+			</div>
+
+		</div>
+	</div>
+
+
+</body>
+</html>

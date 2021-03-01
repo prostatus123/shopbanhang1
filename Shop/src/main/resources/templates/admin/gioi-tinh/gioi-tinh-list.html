@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="admin/template">
+<head>
+<meta charset="UTF-8">
+<title>gioiTinh</title>
+</head>
+<body layout:fragment="content" th:remove="tag">
+	<p>Danh sach gioiTinh</p>
+	<a th:href="@{/admin/gioiTinh/add}">Add gioiTinh</a>
+	<div>
+		<form th:action="@{/admin/gioiTinh/search}" method="get">
+			<label>Search:</label><input type="text" name="keyword"
+				placeholder="nhap keyword" th:value="${keyword}" /> <input
+				type="submit" value="search" />
+		</form>
+	</div>
+	<div>
+		<table border="1">
+			<tr>
+				<td>Id</td>
+				<td>Name</td>
+				<td>Option</td>
+			</tr>
+			<tr th:each="gioiTinh : ${gioiTinhList}">
+				<td th:text="${gioiTinh.id}"></td>
+				<td th:text="${gioiTinh.name}"></td>
+				<td><a th:href="@{'/admin/gioiTinh/update?id='+${gioiTinh.id}}">Edit</a>
+					| <a th:href="@{'/admin/gioiTinh/delete?id='+${gioiTinh.id}}">Delete</a>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div>
+		<a class="btn btn-primary"
+			th:href="@{'/admin/gioiTinh/search?keyword=' + ${keyword} +'&page=' + ${page + 1}}">LOAD
+			MORE</a>
+	</div>
+</body>
+</html>

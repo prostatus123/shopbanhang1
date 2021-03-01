@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html layout:decorator="admin/template">
+
+<head>
+    <title>MENU</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+<body layout:fragment="content" th:remove="tag">
+    <p>Danh sach users</p>
+    <a th:href="@{/admin/user/add}">Add User</a>
+    <div>
+        <form th:action="@{/admin/user/search}" method="get">
+            <label>Search:</label><input type="text" name="keyword" th:value="${keyword}" placeholder="nhap keyword" /> <input type="submit" value="search" />
+        </form>
+    </div>
+    <br><br><br><br><br>
+
+
+    <div class="container">
+        <h2>User</h2>
+       
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <td>Id</td>
+                    <td>Name</td>
+                    <td>Age</td>
+                    <td>Email</td>
+                    <td>Phone</td>
+                    <td>Role</td>
+                    <td>Username</td>
+                    <td>Enable</td>
+                    <td>Gender</td>
+                    <td>Address</td>
+                    <td>Option</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="user:${userList}">
+                    <td th:text="${user.id}"></td>
+                    <td th:text="${user.name}"></td>
+                    <td th:text="${user.age}"></td>
+                    <td th:text="${user.email}"></td>
+                    <td th:text="${user.phone}"></td>
+                    <td th:text="${user.role}"></td>
+                    <td th:text="${user.username}"></td>
+                    <td th:text="${user.enabled}"></td>
+                    <td th:text="${user.gender}"></td>
+                    <td th:text="${user.address}"></td>
+                    <td><a th:href="@{'/admin/user/update?id='+${user.id}}">Edit</a> | <a th:href="@{'/admin/user/delete?id='+${user.id}}">Delete</a> | <a th:href="@{'/admin/user/change-password?id='+${user.id}}">Change
+					Password</a></td>
+
+            </tbody>
+        </table>
+        <div>
+            <a class="btn btn-primary" th:href="@{'/admin/user/search?keyword=' + ${keyword} +'&page=' + ${page + 1}}">LOAD
+		MORE</a>
+        </div>
+</body>
+
+</html>
